@@ -1,12 +1,16 @@
 # Spring Boot CRUD Operations
 
-A Student Management REST API built using Java, Spring Boot, Spring Data JPA, Hibernate, and MySQL.
+A Student Management REST API project built using Java, Spring Boot, Spring Data JPA, Hibernate, and MySQL to demonstrate CRUD operations.
 
 ## About the Project
 
-This project demonstrates how to build REST APIs using Spring Boot.
+This project demonstrates CRUD (Create, Read, Update, Delete) operations on student records using REST APIs built with Spring Boot.
 
-It performs CRUD operations on student records and uses MySQL to store data. The application follows a layered architecture consisting of Controller, Service, Repository, and Entity layers.
+The application allows users to create student records, retrieve student details, update existing records, permanently delete records, and perform soft deletion.
+
+It uses Spring Data JPA and Hibernate for database operations and MySQL for data storage. Postman was used to test the REST APIs.
+
+The project follows a layered architecture consisting of Controller, Service, Repository, and Entity layers.
 
 ## Technologies Used
 
@@ -28,7 +32,7 @@ It performs CRUD operations on student records and uses MySQL to store data. The
 - Update student details
 - Permanently delete a student
 - Soft delete a student
-- Handle missing student records using HTTP 404 responses
+- Return appropriate HTTP status codes for successful operations and missing records
 - Test REST APIs using Postman
 
 ## Project Structure
@@ -59,7 +63,7 @@ This project uses MySQL as its database.
    CREATE DATABASE student_crud_db;
    ```
 
-3. Configure your local `application.properties` file:
+3. Create `src/main/resources/application.properties` locally and configure the database connection:
 
    ```properties
    spring.datasource.url=jdbc:mysql://localhost:3306/student_crud_db
@@ -74,33 +78,29 @@ This project uses MySQL as its database.
 
 **Security:** Never upload your actual database password or other sensitive credentials to GitHub.
 
-The `application.properties` file is excluded from this repository using `.gitignore`. Create and configure this file locally before running the application.
+The `application.properties` file is excluded from this repository using `.gitignore`. Create and configure it locally before running the application.
 
 ## Running the Project
 
 ### Prerequisites
 
 - Java JDK
-- Maven (or the included Maven Wrapper)
 - MySQL Server
 - IntelliJ IDEA
+- Maven or the included Maven Wrapper
 
 ### Steps
 
-1. Clone this repository:
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/kd4102/Spring-Boot-CRUD-Operations.git
    ```
 
 2. Open the project in IntelliJ IDEA.
-
 3. Start MySQL Server.
-
 4. Create the `student_crud_db` database.
-
-5. Create and configure `src/main/resources/application.properties` with your local database credentials.
-
+5. Configure your local `application.properties` file with your MySQL credentials.
 6. Run `CrudSpringBootDemoApplication.java`.
 
 The application runs at:
@@ -121,13 +121,13 @@ All endpoints can be tested using Postman.
 
 ### 1. Create Student
 
-- **HTTP Method:** POST
+- **Method:** POST
 - **Endpoint:** `/create`
 - **Full URL:** `http://localhost:8080/api/students/create`
-- **Description:** Creates a new student.
+- **Purpose:** Creates a new student record.
 - **Success Status:** `201 Created`
 
-**Request Body (JSON example):**
+**Example Request Body:**
 
 ```json
 {
@@ -140,28 +140,28 @@ Note: Adjust the JSON fields according to the properties defined in the `Student
 
 ### 2. Get Student by ID
 
-- **HTTP Method:** GET
+- **Method:** GET
 - **Endpoint:** `/get?id=1`
 - **Full URL:** `http://localhost:8080/api/students/get?id=1`
-- **Description:** Retrieves a student using their ID.
+- **Purpose:** Retrieves a student using their ID.
 - **Success Status:** `200 OK`
 - **If the student is not found:** `404 Not Found`
 
 ### 3. Get All Students
 
-- **HTTP Method:** GET
+- **Method:** GET
 - **Endpoint:** `/getAll`
 - **Full URL:** `http://localhost:8080/api/students/getAll`
-- **Description:** Retrieves all student records.
+- **Purpose:** Retrieves all student records.
 - **Success Status:** `200 OK`
 - **If no students are found:** `404 Not Found`
 
 ### 4. Update Student
 
-- **HTTP Method:** PUT
+- **Method:** PUT
 - **Endpoint:** `/update?id=1`
 - **Full URL:** `http://localhost:8080/api/students/update?id=1`
-- **Description:** Updates an existing student's details.
+- **Purpose:** Updates an existing student's details.
 - **Success Status:** `200 OK`
 - **If the student is not found:** `404 Not Found`
 
@@ -169,29 +169,29 @@ Note: Adjust the JSON fields according to the properties defined in the `Student
 
 ### 5. Permanently Delete Student
 
-- **HTTP Method:** DELETE
+- **Method:** DELETE
 - **Endpoint:** `/delete?id=1`
 - **Full URL:** `http://localhost:8080/api/students/delete?id=1`
-- **Description:** Permanently deletes a student record through the service layer.
+- **Purpose:** Deletes a student record through the service layer.
 - **Success Status:** `200 OK`
 - **Success Response:** `record deleted`
 - **If the student is not found:** `404 Not Found`
 
 ### 6. Soft Delete Student
 
-- **HTTP Method:** PATCH
+- **Method:** PATCH
 - **Endpoint:** `/delete-soft?id=1`
 - **Full URL:** `http://localhost:8080/api/students/delete-soft?id=1`
-- **Description:** Performs a soft delete through the service layer.
+- **Purpose:** Performs a soft delete through the service layer.
 - **Success Status:** `200 OK`
 - **Success Response:** `record deleted`
 - **If the student is not found:** `404 Not Found`
 
-Soft delete is intended to mark a student as deleted without physically removing the record. The actual behavior depends on the implementation in `StudentService`.
+Soft deletion is intended to mark a record as deleted without physically removing it. The exact behavior depends on the implementation in `StudentService`.
 
 ## API Testing with Postman
 
-The REST APIs were tested using Postman.
+Postman was used to test the REST API endpoints.
 
 ### Testing Steps
 
@@ -200,8 +200,8 @@ The REST APIs were tested using Postman.
 3. Select the appropriate HTTP method.
 4. Enter the endpoint URL.
 5. For POST and PUT requests, select **Body → raw → JSON** and provide the request body.
-6. For GET, PUT, DELETE, and PATCH requests that require an ID, pass the ID as a query parameter.
-7. Click **Send** and inspect the response status and body.
+6. For requests that require a student ID, pass the ID as a query parameter.
+7. Click **Send** to view the response status and body.
 
 ## Author
 
