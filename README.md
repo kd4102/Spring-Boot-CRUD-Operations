@@ -83,17 +83,29 @@ The application runs on:
 
 `http://localhost:8080`
 
-## API Features
 
-| Operation | Description |
-|---|---|
-| Create | Add a new student |
-| Read | Retrieve one or all students |
-| Update | Update student details |
-| Delete | Delete a student record |
-| Soft Delete | Mark a student as deleted |
 
-Refer to `StudentController.java` for the actual API endpoints.
+
+
+## API Testing
+
+The REST APIs were tested using Postman.
+
+The following operations are supported:
+
+| HTTP Method | Operation | Description |
+|---|---|---|
+| POST | Create Student | Adds a new student |
+| GET | Get Student by ID | Retrieves a student using ID |
+| GET | Get All Students | Retrieves all students |
+| PUT | Update Student | Updates student details |
+| DELETE | Delete Student | Deletes a student record |
+| PATCH/PUT | Soft Delete Student | Marks a student as deleted without physically removing the record |
+
+## Tools Used for Testing
+
+- Postman
+- MySQL
 
 ## Author
 
